@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Hello World!</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+  <style>
+      @import url(../Build/Cesium/Widgets/widgets.css);
+      #cesiumContainer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          margin: 0;
+          overflow: hidden;
+          padding: 0;
+          font-family: sans-serif;
+      }
+      body{
+          padding: 0;
+          margin: 0;
+          overflow: hidden;
+      }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+//    Exercise-1 Hello World, Here we will see what can cesiumjs offer us.
+//    var viewer = new Cesium.Viewer('cesiumContainer');
+
+//    Exercise-2 Here we will see about layers
+   /*
+      var viewer = new Cesium.Viewer('cesiumContainer', {
+          imageryProvider : new Cesium.ArcGisMapServerImageryProvider( {
+              url : 'http://server.arcgisonline.com/ArcGIS/rest/services/World_street_Map/MapServer'
+          }),
+          baseLayerPicker : false,
+      });
+   */
+
+//    Exercise-3 Here we will see about superimposing layers
+ /*
+      var viewer = new Cesium.Viewer('cesiumContainer', {
+          imageryProvider : new Cesium.ArcGisMapServerImageryProvider ({
+              url : 'http://server.arcgisonline.com/ArcGIS/rest/services/World_street_Map/MapServer', 
+          }),
+          baseLayerPicker : false,
+      });
+      var layers = viewer.scene.imageryLayers;
+      var blackMarble = layers.addImageryProvider(new Cesium.TileMapServiceImageryProvider({
+          url : '//cesiumjs.org/tilesets/imagery/blackmarble',
+          maxiumLevel : 8,
+          credit : 'Black Marble imagery courtesy NASA earth observatory',
+      }));
+      //layers.lower(blackMarble);
+      blackMarble.alpha = 0.5;  // Transparency value
+      blackMarble.brightness = 2.0;   // > 1.0 will increase brightness
+ */
+
+//    Exercise-4 Day-Night effect
+//  /*
+      var viewer = new Cesium.Viewer('cesiumContainer' , {
+          imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
+              url : 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer',
+          }),
+          baseLayerPicker: false,
+      });
+      //viewer.scene.globe.enableLighting : true;
+      var scene = viewer.scene;
+      var globe = scene.globe;
+      globe.enableLighting = true;
+//  */
+
+//    Exercise-5 Adding an image on the Globe
+  /*
+      var viewer = new Cesium.Viewer('cesiumContainer' , {
+          imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
+              url : 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer',
+          }),
+          baseLayerPicker: false,
+      });
+      var layers = viewer.scene.imageryLayers;
+      var blackMarble = layers.addImageryProvider(new Cesium.TileMapServiceImageryProvider({
+          //url : '//cesiumjs.org/tilesets/imagery/blackmarble',
+          url : '//cesiumjs.org/tilesets/imagery/naturalearthii',
+          maxiumLevel : 8,
+          credit: 'Black Marble imagery courtesy NASA Earth Observatory',
+      }));
+
+      layers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+          url : 'E:/Python Test/14062018/Cesium-1.46/Apps/a.jpg',
+          rectangle : Cesium.Rectangle.fromDegrees(-75.0, 28.0, -55.0, 31.75)
+      }));
+  */
+
+//    Exercise-6 Adding Terrian
+  /* 
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var terrainProvider = new Cesium.CesiumTerrainProvider({
+          url : '//cesiumjs.org/tilesets/terrain/smallterrain',
+          });
+      viewer.scene.terrainProvider = terrainProvider;
+  */
+
+//    Exercise-7 Adding red color rectangle
+  /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+
+      scene.primitives.add(new Cesium.RectanglePrimitive({
+          rectangle : Cesium.Rectangle.fromDegrees(-100,20,-90,30),
+          material : Cesium.Material.fromType('Color', {
+              color : new Cesium.Color(1,0,0,1),
+          }),
+      }));
+  */
+
+//    Exercise-8 Using geometries and appearances
+   /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.RectangleGeometry({
+              rectangle : Cesium.Rectangle.fromDegrees(-100,20,-90,30),
+              vertexFormat : Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+          })
+      });
+
+      scene.Primitive.add(new Cesium.Primitive({
+          geometryInstances : instance,
+          appearance : new Cesium.EllipsoidSurfaceAppearance({
+              material : Cesium.Material.fromType('Dot')
+          })
+      }));
+  */
+
+//    Exercise-9 Drawing a circle
+  /* 
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.CircleGeometry({
+              center : Cesium.Cartesian3.fromDegrees(-100,20),
+              radius : 1000000,
+              height : 2000000,
+          }),
+      });
+      scene.primitives.add(new Cesium.primitives({
+          GeometryInstance : instance,
+          appearance : new Cesium.EllipsoidSurfaceAppearance({
+              material : Cesium.Material.fromType('Dot'),
+          }),
+      }));
+  */
+
+//    Exercise-10 Using Geometries and Appearance ; Hovering Rectangle
+ /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.RectangleGeometry({
+              rectangle : Cesium.Rectangle.fromDegrees(-100,20,-85,35),
+              height :3000000, 
+          })
+      });
+
+      scene.primitives.add(new Cesium.Primitives({
+          geometryInstances : instance,
+          appearance : new Cesium.EllipsoidSurfaceAppearance({
+              material : Cesium.Material.fromType('Dot')
+          })
+      }));
+  */
+
+//    Exercise-11 Drawing a circle out line geometry & then drawing vertical lines
+ /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.CircleOutlineGeometry({
+              center : Cesium.Cartesian3.fromDegrees(-100,20),
+              radius : 1000000,
+              height : 3000000,
+              extrudedHeight : 1000000,
+              numberOfVerticalLines : 16,
+          }),
+      });
+
+      scene.primitives.add(new Cesium.Primitive({
+          geometryInstances : instance,
+          appearance : new Cesium.EllipsoidSurfaceAppearance({
+              material : Cesium.Material.fromType('Dot'),
+          }),
+      }));
+  */
+
+//    Exercise-12 Get Natural Earth with daylight
+  /*
+      var viewer = new Cesium.Viewer('cesiumContainer', {
+          imageryProvider : new Cesium.TileMapServiceImageryProvider({
+              url : '//cesiumjs.org/tilesets/imagery/naturalearthii',
+          }),
+          animation : false,
+          homeButton : false,
+          baseLayerPicker : false,
+          infoBox : false,
+          timeline : false,
+          navigationInstructionsInitiallyVisible : false,
+          navigationHelpButton : false,
+          sceneMode : Cesium.SceneMode.COLUMBUS_VIEW,
+      });
+      var scene = viewer.scene;
+      var globe = scene.globe;
+      globe.enableLighting = true;
+  */
+
+//    Exercise-13 Here we make a square and a circle stand side by side
+ /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.RectangleGeometry({
+              rectangle : Cesium.Rectangle.fromDegrees(-100.0, 20.0, -90.0, 30.0),
+              vertexFormat : Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+          })
+      });
+      var anotherInstance = new Cesium.GeometryInstance({
+          geometry : new Cesium.CircleGeometry({
+              center : Cesium.Cartesian3.fromDegrees(-80.0, 25.0),
+              radius : 500000,
+              height : 1000000,
+          }),
+      });
+      scene.primitives.add(new Cesium.Primitive({
+          geometryInstances : [instance, anotherInstance],
+          appearance : new Cesium.EllipsoidSurfaceAppearance({
+              material : Cesium.Material.fromType('Dot')
+          }),
+      }));
+  */
+
+//    Exercise-14 Here we make a square and a circle stand side by side with different color
+ /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.RectangleGeometry({
+              rectangle : Cesium.Rectangle.fromDegrees(-100.0, 20.0, -90.0, 30.0),
+              vertexFormat : Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+          }),
+          attributes : {
+              color : new Cesium.ColorGeometryInstanceAttribute(1,0,0,1),
+          }
+      });
+      var anotherInstance = new Cesium.GeometryInstance({
+          geometry : new Cesium.CircleGeometry({
+              center : Cesium.Cartesian3.fromDegrees(-80.0, 25.0),
+              radius : 500000,
+              height : 1000000,
+              vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT,
+          }),
+          attributes : {
+              color : new Cesium.ColorGeometryInstanceAttribute(0,0,1,1),
+          }
+      });
+      scene.primitives.add(new Cesium.Primitive({
+          geometryInstances : [instance, anotherInstance],
+          appearance : new Cesium.EllipsoidSurfaceAppearance()
+      }));
+  */
+
+//    Exercise-15 Combining a lot of geometry
+  /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+
+      var instances = [];
+
+      for (var lon = -180.0; lon < 180.0; lon += 5.0) {
+          for (var lat = -90.0; lat < 90.0; lat += 5.0) {
+              instance.push(new Cesium.GeometryInstance({
+                  geometry : new Cesium.RectangleGeometry({
+                  rectangle : Cesium.Rectangle.fromDegrees(lon, lat, lon + 5.0, lat + 5.0)  
+              }),
+              attributes : {
+                  color : Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromRandom({alpha : .4}))
+              }
+              }));
+          }
+      }
+      scene.primitives.add(new Cesium({
+          geometryInstances : instances,
+          appearance : new Cesium.PerInstanceColorAppearance()
+      }));
+  */
+
+//    Exercise-16 Clicking rectangle
+  /*
+      var viewer = new Cesium.Viewer('cesiumContainer');
+      var scene = viewer.scene;
+
+      var instance = new Cesium.GeometryInstance({
+          geometry : new Cesium.RectangleGeometry({
+              rectangle : Cesium.Rectangle.fromDegrees(-100.0, 30.0, -90.0, 40.0)
+          }),
+          id : 'my rectangle',
+          attributes : {
+              color : Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.RED)
+          }
+      });
+
+      scene.primitives.add(new Cesium.Primitive({
+          geometryInstances : instance,
+          appearance : new Cesium.PerInstanceColorAppearance()
+      }));
+
+      var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+      handler.setInputAction(function (movement) {
+          var pick = scene.pick = scene.pick(movement.position);
+          console.log(pick);
+          if (Cesium.defined(pick) && (pick.id === 'my rectangle')) {
+              console.log('Mouse clicked rectangle.');
+              //alert("I am an alert box!");
+              //window.open("http://www.google.com");
+          }
+      },
+      Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  */
+  </script>
+</body>
+</html>
